@@ -1,8 +1,8 @@
 (ns background.core)
 
-(defn main [tab]
+(defn main [tab])
 
-  (js/alert "foooooooooooooooddoooodoobarr"))
+  ;(js/alert "foooooooooooooooddoooodoobarr"))
 
 
 

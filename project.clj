@@ -13,7 +13,8 @@
                  [ring.middleware.logger "0.5.0"]
                  [compojure "1.5.0"]
                  [environ "1.0.3"]
-                 [org.omcljs/om "1.0.0-alpha36"]]
+                 [org.omcljs/om "1.0.0-alpha36"]
+                 [prismatic/dommy "1.1.0"]]
 
   :plugins [[lein-cljsbuild "1.1.3"]
             [lein-environ "1.0.3"]]
@@ -40,7 +41,7 @@
 
   :cljsbuild {:builds
               [{:id "popup"
-                :source-paths ["src/cljs/popup"]
+                :source-paths ["src/cljs/popup" "src/cljs/common"]
                 :jar true
                 :compiler {:main popup.core
                            :output-to "resources/public/js/compiled/popup.js"
@@ -51,7 +52,7 @@
                            :pretty-print false}}
 
                {:id "background"
-                :source-paths ["src/cljs/background"]
+                :source-paths ["src/cljs/background" "src/cljs/common"]
                 :jar true
                 :compiler {:main background.core
                            :output-to "resources/public/js/compiled/background.js"
