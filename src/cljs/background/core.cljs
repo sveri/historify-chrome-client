@@ -1,4 +1,4 @@
-(ns historify-chrome-client.core)
+(ns background.core)
 
 (defn main [tab]
 

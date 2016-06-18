@@ -39,31 +39,23 @@
   :repl-options {:init-ns user}
 
   :cljsbuild {:builds
-              [{:id "app"
-                :source-paths ["src/cljs"]
-
-                :figwheel true
-                ;; Alternatively, you can configure a function to run every time figwheel reloads.
-                ;; :figwheel {:on-jsload "historify-chrome-client.core/on-figwheel-reload"}
-
-                :compiler {:main historify-chrome-client.core
-                           :asset-path "js/compiled/out"
-                           :output-to "resources/public/js/compiled/historify_chrome_client.js"
-                           :output-dir "resources/public/js/compiled/out"
-                           :source-map-timestamp true}}
-
-               {:id "test"
-                :source-paths ["src/cljs" "test/cljs"]
-                :compiler {:output-to "resources/public/js/compiled/testable.js"
-                           :main historify-chrome-client.test-runner
-                           :optimizations :none}}
-
-               {:id "min"
-                :source-paths ["src/cljs"]
+              [{:id "popup"
+                :source-paths ["src/cljs/popup"]
                 :jar true
-                :compiler {:main historify-chrome-client.core
-                           :output-to "resources/public/js/compiled/historify_chrome_client.js"
-                           :output-dir "target"
+                :compiler {:main popup.core
+                           :output-to "resources/public/js/compiled/popup.js"
+                           :output-dir "target/popup"
+                           :externs ["chrome_extensions.js"]
+                           :source-map-timestamp true
+                           :optimizations :advanced
+                           :pretty-print false}}
+
+               {:id "background"
+                :source-paths ["src/cljs/background"]
+                :jar true
+                :compiler {:main background.core
+                           :output-to "resources/public/js/compiled/background.js"
+                           :output-dir "target/background"
                            :externs ["chrome_extensions.js"]
                            :source-map-timestamp true
                            :optimizations :advanced

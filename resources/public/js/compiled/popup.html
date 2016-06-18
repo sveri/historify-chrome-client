@@ -5,7 +5,7 @@
  value "popup.html".
  -->
 <html>
-  <head>
+<head>
     <title>Getting Started Extension's Popup</title>
     <style>
       body {
@@ -17,8 +17,9 @@
         white-space: pre;
         text-overflow: ellipsis;
         overflow: hidden;
-        max-width: 400px;
+        max-width: 500px;
       }
+
     </style>
 
     <!--
@@ -27,19 +28,22 @@
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
-    <!--<script src="pure.js"></script>-->
+    <script src="popup.js"></script>
     <!--<script src="historify_chrome_client.js"></script>-->
-  </head>
-  <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
+</head>
+<body>
 
-    <form>
-      <input type="text" name="username">
-      <input type="password" name="password">
+<h3>Log into Historify</h3>
 
-    </form>
+<form>
+    <label>Username:</label><br>
+    <input type="text" name="username" id="username"><br>
+    <label>Password:</label><br>
+    <input type="password" name="password" id="password">
+    <input type="submit" value="Login" id="login-button">
 
-  </body>
+</form>
+
+</body>
 </html>
 

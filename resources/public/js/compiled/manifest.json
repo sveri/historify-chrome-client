@@ -12,7 +12,7 @@
   },
 
   "background": {
-    "scripts": ["historify_chrome_client.js"],
+    "scripts": ["background.js"],
     "persistent": false
   },
   "permissions": [
