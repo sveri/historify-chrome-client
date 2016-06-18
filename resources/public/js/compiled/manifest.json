@@ -10,10 +10,19 @@
     "default_popup": "popup.html",
     "default_title": "Historify Client"
   },
+
+  "background": {
+    "scripts": ["historify_chrome_client.js"],
+    "persistent": false
+  },
   "permissions": [
+    "http://*/*",
+    "https://*/*",
     "activeTab",
-    "https://ajax.googleapis.com/",
-    "http://localhost:8080/",
+//    "tabs",
+    "webNavigation",
+//    "https://ajax.googleapis.com/",
+//    "http://localhost:8080/",
     "https://*.sveri.de/"
   ]
 }
