@@ -19,10 +19,7 @@
     "http://*/*",
     "https://*/*",
     "activeTab",
-//    "tabs",
     "webNavigation",
-//    "https://ajax.googleapis.com/",
-//    "http://localhost:8080/",
-    "https://*.sveri.de/"
+    "storage"
   ]
 }

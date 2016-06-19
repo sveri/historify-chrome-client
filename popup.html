@@ -1,0 +1,54 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+<head>
+<title>Getting Started Extension's Popup</title>
+<style>
+body {
+	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+	font-size: 100%;
+}
+
+#status {
+	/* avoid an excessively wide status text */
+	white-space: pre;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	max-width: 700px;
+}
+</style>
+
+<!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+</head>
+<body>
+	<h3>Log into Historify</h3>
+
+	<div id="error"></div>
+	<div id="loggedin" style="display: none">
+		You are now logged into Historify.<br>
+		<button id="logout-button">Logout</button>
+	</div>
+
+	<div id="login-form">
+<!-- 	<div id="login-form" style="display: none"> -->
+		<label>Username:</label> <br> <input type="text" name="username"
+			id="username"> <br> <label>Password:</label> <br> <input
+			type="password" name="password" id="password">
+		<button id="login-button">Login</button>
+	</div>
+
+
+	<script src="jquery-3.0.0.min.js"></script>
+	<script src="popup.js"></script>
+</body>
+</html>
+
