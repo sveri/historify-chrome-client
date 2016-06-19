@@ -12,7 +12,7 @@ function storeToken(data) {
 
 		
 		chrome.storage.sync.get("historify-token", function(items){
-			console.log("foooF" + JSON.stringify(items));
+			console.log("foooF" + JSON.stringify(items["historify-token"]));
 		});
 	});
 }
@@ -24,7 +24,13 @@ function showError(e) {
 function main() {
 	
 	chrome.storage.sync.get("historify-token", function(items){
-		console.log("foooF" + JSON.stringify(items.historify-token));
+		if(items["historify-token"] !== undefined){
+			$("#login-form").hide();
+			$("#loggedin").show();			
+		} else  {
+			$("#login-form").show();
+			$("#loggedin").hide();			
+		}
 	});
 	
 	
