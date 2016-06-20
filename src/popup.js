@@ -3,17 +3,20 @@
 //const
 //history_token_key = "historify-token";
 
+function displayLoggedOutHtml(){
+	
+}
+
+function displayLoggedInHtml(){
+	
+}
+
 function storeToken(data) {
 	chrome.storage.sync.set({
 		"historify-token" : data.token
 	}, function() {
 		$("#login-form").hide();
 		$("#loggedin").show();
-
-		
-		chrome.storage.sync.get("historify-token", function(items){
-			console.log("foooF" + JSON.stringify(items["historify-token"]));
-		});
 	});
 }
 

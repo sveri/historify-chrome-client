@@ -30,25 +30,26 @@ body {
      -->
 </head>
 <body>
-	<h3>Log into Historify</h3>
+	<div style="width: 400px">
 
-	<div id="error"></div>
-	<div id="loggedin" style="display: none">
-		You are now logged into Historify.<br>
-		<button id="logout-button">Logout</button>
+		<div id="error"></div>
+		<div id="loggedin" style="display: none">
+			You are now logged into <a href="http://historify.sveri.de">Historify</a>.<br><br>
+			<button id="logout-button">Logout</button>
+		</div>
+
+		<div id="login-form" style="display: none">
+			<h3>Log into Historify</h3>
+			<label>Username:</label> <br> <input type="text" name="username"
+				id="username"> <br> <label>Password:</label> <br>
+			<input type="password" name="password" id="password"> <br>
+			<button id="login-button">Login</button>
+		</div>
 	</div>
 
-	<div id="login-form">
-<!-- 	<div id="login-form" style="display: none"> -->
-		<label>Username:</label> <br> <input type="text" name="username"
-			id="username"> <br> <label>Password:</label> <br> <input
-			type="password" name="password" id="password">
-		<button id="login-button">Login</button>
-	</div>
 
-
-	<script src="jquery-3.0.0.min.js"></script>
-	<script src="popup.js"></script>
+	<script src="src/jquery-3.0.0.min.js"></script>
+	<script src="src/popup.js"></script>
 </body>
 </html>
 
