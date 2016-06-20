@@ -16,7 +16,12 @@ function displayLoggedInIcon() {
 	});
 }
 
-function postBrowserLink(tab, token){
+function cannotPost(e) {
+	displayLoggedOutIcon();
+	chrome.storage.sync.remove("historify-token");
+}
+
+function postBrowserLink(tab, token) {
 	$.ajax({
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Authorization", "Bearer " + token);
@@ -26,18 +31,22 @@ function postBrowserLink(tab, token){
 		data : JSON.stringify({
 			uri : tab.url,
 			title : tab.title,
-			visitedAt: Date.now(),
-			clientId: "CHROME"			
+			visitedAt : Date.now(),
+			clientId : "CHROME"
 		}),
 		dataType : 'json',
-		contentType : "application/json; charset=utf-8"
+		contentType : "application/json; charset=utf-8",
+		error : cannotPost
 	});
 }
 
-function navigationCompleted(tab){
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+function navigationCompleted(tab) {
+	chrome.tabs.query({
+		active : true,
+		currentWindow : true
+	}, function(tabs) {
 		var tab = tabs[0];
-		if(!tab.url.startsWith("chrome://")){
+		if (!tab.url.startsWith("chrome://")) {
 
 			chrome.storage.sync.get("historify-token", function(items) {
 				if (items["historify-token"] !== undefined) {
@@ -46,11 +55,11 @@ function navigationCompleted(tab){
 					displayLoggedOuIcon();
 				}
 			});
-			
+
 		}
 
-	  });
+	});
 }
 
-//chrome.webNavigation.onCompleted.addListener(navigationCompleted);
+// chrome.webNavigation.onCompleted.addListener(navigationCompleted);
 chrome.webNavigation.onCommitted.addListener(navigationCompleted);

@@ -34,15 +34,18 @@ function showError(e) {
 	$("#error").text(JSON.stringify(e));
 }
 
-function main() {
-
+function isLoggedIn(){
 	chrome.storage.sync.get("historify-token", function(items) {
 		if (items["historify-token"] !== undefined) {
 			displayLoggedInHtml();
 		} else {
 			displayLoggedOutHtml();
 		}
-	});
+	});	
+}
+
+function main() {
+	isLoggedIn();
 
 	$("#login-button").click(function() {
 		var username = $("#username").val();
@@ -74,3 +77,5 @@ function main() {
 }
 
 document.addEventListener('DOMContentLoaded', main);
+
+chrome.browserAction.onClicked.addListener(isLoggedIn);
