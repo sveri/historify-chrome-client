@@ -1,22 +1,32 @@
 /*jshint esversion: 6 */
 
-//const
-//history_token_key = "historify-token";
-
-function displayLoggedOutHtml(){
-	
+function displayLoggedOutHtml() {
+	$("#login-form").show();
+	$("#loggedin").hide();
+	chrome.browserAction.setIcon({
+		path : {
+			"19" : "img/icon19_disconnected.png",
+			"38" : "img/icon38_disconnected.png"
+		}
+	});
 }
 
-function displayLoggedInHtml(){
-	
+function displayLoggedInHtml() {
+	$("#login-form").hide();
+	$("#loggedin").show();
+	chrome.browserAction.setIcon({
+		path : {
+			"19" : "img/icon19.png",
+			"38" : "img/icon38.png"
+		}
+	});
 }
 
 function storeToken(data) {
 	chrome.storage.sync.set({
 		"historify-token" : data.token
 	}, function() {
-		$("#login-form").hide();
-		$("#loggedin").show();
+		displayLoggedInHtml();
 	});
 }
 
@@ -25,18 +35,15 @@ function showError(e) {
 }
 
 function main() {
-	
-	chrome.storage.sync.get("historify-token", function(items){
-		if(items["historify-token"] !== undefined){
-			$("#login-form").hide();
-			$("#loggedin").show();			
-		} else  {
-			$("#login-form").show();
-			$("#loggedin").hide();			
+
+	chrome.storage.sync.get("historify-token", function(items) {
+		if (items["historify-token"] !== undefined) {
+			displayLoggedInHtml();
+		} else {
+			displayLoggedOutHtml();
 		}
 	});
-	
-	
+
 	$("#login-button").click(function() {
 		var username = $("#username").val();
 		var password = $("#password").val();
@@ -62,8 +69,7 @@ function main() {
 
 	$("#logout-button").click(function() {
 		chrome.storage.sync.remove("historify-token", function() {
-			$("#login-form").show();
-			$("#loggedin").hide();
+			displayLoggedOutHtml();
 		});
 	});
 }
