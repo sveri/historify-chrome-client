@@ -47,24 +47,23 @@ function main() {
 	$("#login-button").click(function() {
 		var username = $("#username").val();
 		var password = $("#password").val();
-		// if (username && password) {
-		$.ajax({
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader("Accept", "application/json");
-				xhr.setRequestHeader("Content-Type", "application/json");
-			},
-			type : "POST",
-			url : "http://localhost:8080/apilogin",
-			data : JSON.stringify({
-				name : "admin",
-				password : "admin"
-			}),
-			dataType : 'json',
-			contentType : "application/json; charset=utf-8",
-			success : storeToken,
-			error : showError
-		});
-		// }
+		if (username && password) {
+			$.ajax({
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("Accept", "application/json");
+				},
+				type : "POST",
+				url : "http://localhost:8080/apilogin",
+				data : JSON.stringify({
+					name : username,
+					password : password
+				}),
+				dataType : 'json',
+				contentType : "application/json; charset=utf-8",
+				success : storeToken,
+				error : showError
+			});
+		}
 	});
 
 	$("#logout-button").click(function() {
