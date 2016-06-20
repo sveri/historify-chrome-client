@@ -41,25 +41,17 @@ function postBrowserLink(tab, token) {
 }
 
 function navigationCompleted(tab) {
-	chrome.tabs.query({
-		active : true,
-		currentWindow : true
-	}, function(tabs) {
-		var tab = tabs[0];
-		if (!tab.url.startsWith("chrome://")) {
-
-			chrome.storage.sync.get("historify-token", function(items) {
-				if (items["historify-token"] !== undefined) {
-					postBrowserLink(tab, items["historify-token"]);
-				} else {
-					displayLoggedOuIcon();
-				}
-			});
-
+	chrome.storage.sync.get("historify-token", function(items) {
+		if (items["historify-token"] !== undefined) {
+			postBrowserLink(tab, items["historify-token"]);
+		} else {
+			displayLoggedOutIcon();
 		}
-
 	});
 }
 
-// chrome.webNavigation.onCompleted.addListener(navigationCompleted);
-chrome.webNavigation.onCommitted.addListener(navigationCompleted);
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+	if (changeInfo.url !== undefined && !tab.url.startsWith("chrome://")) {
+		navigationCompleted(tab);
+	}
+});
