@@ -63,9 +63,7 @@ function logInToHistorify() {
 	}
 }
 
-function main() {
-	isLoggedIn();
-
+function registerEvents(){
 	$("#login-button").click(function() {
 		logInToHistorify();
 	});
@@ -80,7 +78,13 @@ function main() {
 		chrome.storage.sync.remove("historify-token", function() {
 			displayLoggedOutHtml();
 		});
-	});
+	});	
+}
+
+function main() {
+	isLoggedIn();
+
+	registerEvents();
 }
 
 document.addEventListener('DOMContentLoaded', main);
