@@ -29,8 +29,8 @@ function postBrowserLink(tab, token) {
 		type : "POST",
 		url : "http://localhost:8080/api/browserlink",
 		data : JSON.stringify({
-			uri : tab.url,
-			title : tab.title,
+			uri : tab.url.substr(0, 250),
+			title : tab.title.substr(0, 250),
 			visitedAt : Date.now(),
 			clientId : "CHROME"
 		}),
@@ -50,8 +50,10 @@ function navigationCompleted(tab) {
 	});
 }
 
+var google_search_regex = new RegExp('http.*\/\/.*google.*url\?', 'i');
+
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-	if (changeInfo.url !== undefined && !tab.url.startsWith("chrome://")) {
+	if (changeInfo.url !== undefined && !tab.url.startsWith("chrome://") && !tab.url.match(google_search_regex)) {
 		navigationCompleted(tab);
 	}
 });
