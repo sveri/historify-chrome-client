@@ -21,7 +21,7 @@ function cannotPost(e) {
 	chrome.storage.sync.remove("historify-token");
 }
 
-function postBrowserLink(tab, token) {
+function postBrowserLink(tab, token, description) {
 	$.ajax({
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Authorization", "Bearer " + token);
@@ -32,7 +32,8 @@ function postBrowserLink(tab, token) {
 			uri : tab.url.substr(0, 250),
 			title : tab.title.substr(0, 250),
 			visitedAt : Date.now(),
-			clientId : "CHROME"
+			clientId : "CHROME", 
+			description: description
 		}),
 		dataType : 'json',
 		contentType : "application/json; charset=utf-8",
@@ -43,7 +44,26 @@ function postBrowserLink(tab, token) {
 function navigationCompleted(tab) {
 	chrome.storage.sync.get("historify-token", function(items) {
 		if (items["historify-token"] !== undefined) {
-			postBrowserLink(tab, items["historify-token"]);
+			
+			var code = 'var meta = document.querySelector("meta[name=\'description\']");' + 
+	           'if (meta) meta = meta.getAttribute("content");' +
+	           '({' +
+	           '    title: document.title,' +
+	           '    description: meta || ""' +
+	           '});';
+			
+				chrome.tabs.executeScript({
+				    code: code
+				}, function(results) {
+				    if (!results) {
+					    console.log("perm error");
+				        return;
+				    }
+				    var result = results[0];
+				    postBrowserLink(tab, items["historify-token"], result.description);
+				});
+
+			
 		} else {
 			displayLoggedOutIcon();
 		}
