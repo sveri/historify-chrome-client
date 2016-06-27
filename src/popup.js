@@ -34,18 +34,23 @@ function showError(e) {
 	$("#error").text(JSON.stringify(e));
 }
 
-function isLoggedIn(){
+function isLoggedIn() {
 	chrome.storage.sync.get("historify-token", function(items) {
 		if (items["historify-token"] !== undefined) {
 			displayLoggedInHtml();
 		} else {
 			displayLoggedOutHtml();
 		}
-	});	
+	});
 }
 
-function main() {
-	isLoggedIn();
+function defineEvents() {
+	$(document).keypress(function(e) {
+		if (e.which == 13) {
+			$('#login-button').click();
+			e.preventDefault();
+		}
+	});
 
 	$("#login-button").click(function() {
 		var username = $("#username").val();
@@ -56,7 +61,7 @@ function main() {
 					xhr.setRequestHeader("Accept", "application/json");
 				},
 				type : "POST",
-				url : "http://localhost:8080/apilogin",
+				url : "http://historify.sveri.de/apilogin",
 				data : JSON.stringify({
 					name : username,
 					password : password
@@ -74,6 +79,13 @@ function main() {
 			displayLoggedOutHtml();
 		});
 	});
+
+}
+
+function main() {
+	isLoggedIn();
+
+	defineEvents();
 }
 
 document.addEventListener('DOMContentLoaded', main);

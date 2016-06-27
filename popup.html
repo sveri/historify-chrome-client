@@ -34,15 +34,18 @@ body {
 
 		<div id="error"></div>
 		<div id="loggedin" style="display: none">
-			You are now logged into <a href="http://historify.sveri.de">Historify</a>.<br><br>
+			You are now logged into <a href="http://historify.sveri.de">Historify</a>.<br>
+			<br>
 			<button id="logout-button">Logout</button>
 		</div>
 
 		<div id="login-form" style="display: none">
 			<h3>Log into Historify</h3>
-			<label>Username:</label> <br> <input type="text" name="username"
-				id="username"> <br> <label>Password:</label> <br>
-			<input type="password" name="password" id="password"> <br>
+			<label>Username:</label> <br>
+			<input type="text" name="username" id="username" tabindex="1">
+			<br> <label>Password:</label> <br>
+			<input type="password" name="password" id="password" tabindex="2">
+			<br>
 			<button id="login-button">Login</button>
 		</div>
 	</div>
