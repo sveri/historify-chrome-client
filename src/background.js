@@ -27,12 +27,12 @@ function postBrowserLink(tab, token) {
 			xhr.setRequestHeader("Authorization", "Bearer " + token);
 		},
 		type : "POST",
-		url : "http://historify.sveri.de/api/browserlink",
+		url : "http://localhost:8080/api/browserlink",
 		data : JSON.stringify({
-			uri : tab.url.substr(0, 250),
-			title : tab.title.substr(0, 250),
+			uri : tab.url.substr(0, 253),
+			title : tab.title.substr(0, 253),
 			visitedAt : Date.now(),
-			clientId : "CHROME"
+			client : "CHROME"
 		}),
 		dataType : 'json',
 		contentType : "application/json; charset=utf-8",
