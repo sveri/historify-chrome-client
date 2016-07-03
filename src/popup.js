@@ -61,7 +61,7 @@ function defineEvents() {
 					xhr.setRequestHeader("Accept", "application/json");
 				},
 				type : "POST",
-				url : "http://historify.sveri.de/apilogin",
+				url : "http://localhost:8080/apilogin",
 				data : JSON.stringify({
 					name : username,
 					password : password

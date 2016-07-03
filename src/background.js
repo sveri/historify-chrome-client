@@ -17,8 +17,10 @@ function displayLoggedInIcon() {
 }
 
 function cannotPost(e) {
-	displayLoggedOutIcon();
-	chrome.storage.sync.remove("historify-token");
+	if(e.responseJSON.status == 401){
+		displayLoggedOutIcon();
+		chrome.storage.sync.remove("historify-token");
+	}
 }
 
 function postBrowserLink(tab, token) {
@@ -54,9 +56,6 @@ var google_search_regex = new RegExp('http.*\/\/.*google.*url\?', 'i');
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	if (changeInfo.url !== undefined && !tab.url.startsWith("chrome://") && !tab.url.match(google_search_regex)) {
-		console.log(JSON.stringify(tabId));
-		console.log(JSON.stringify(changeInfo));
-		console.log(JSON.stringify(tab));
 		navigationCompleted(tab);
 	}
 });
