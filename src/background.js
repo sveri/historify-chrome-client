@@ -34,7 +34,7 @@ function postBrowserLink(tab, token, description) {
 			uri : tab.url.substr(0, 250),
 			title : tab.title.substr(0, 250),
 			visitedAt : Date.now(),
-			clientId : "CHROME", 
+			client : "CHROME", 
 			description: description
 		}),
 		dataType : 'json',
