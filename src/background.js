@@ -17,8 +17,10 @@ function displayLoggedInIcon() {
 }
 
 function cannotPost(e) {
-	displayLoggedOutIcon();
-	chrome.storage.sync.remove("historify-token");
+	if(e.responseJSON.status == 401){
+		displayLoggedOutIcon();
+		chrome.storage.sync.remove("historify-token");
+	}
 }
 
 function postBrowserLink(tab, token, description) {
