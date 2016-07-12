@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Historify Client",
-  "description": "Connects to historify to save browser history",
-  "version": "1.0",
+  "description": "Connects to historify to save browser history: http://historify.sveri.de/",
+  "version": "0.1",
 
   "browser_action": {
     "default_popup": "popup.html",
